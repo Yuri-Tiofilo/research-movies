@@ -2,8 +2,14 @@ import styled from 'styled-components'
 
 export const Container = styled.footer`
   width: 100%;
-  height: 60px;
+  height: 48px;
 
   margin-top: 30px;
-  background: ${({ theme }) => theme.COLORS.PRIMARY};
+
+  display: flex;
+  justify-content: center;
+
+  span {
+    font-weight: 700;
+  }
 `

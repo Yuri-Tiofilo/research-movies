@@ -1,9 +1,17 @@
+import { Footer, Header } from 'components'
 import React from 'react'
 
-import { Container } from './styles'
+import { Container, Content } from './styles'
 
 const Home = () => {
-  return <Container>hola home</Container>
+  return (
+    <Container>
+      <Header />
+
+      <Content>hola home</Content>
+      <Footer />
+    </Container>
+  )
 }
 
 export default Home

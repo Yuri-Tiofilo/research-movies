@@ -6,4 +6,4 @@ const api = axios.create({
   responseType: 'json'
 })
 
-export { api }
+export default api

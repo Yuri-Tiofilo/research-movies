@@ -8,12 +8,12 @@ export default createGlobalStyle`
     outline:0;
   }
   body{
-    background:#fff;
-    color:#000;
+    background: ${({ theme }) => theme.COLORS.BACKGROUND};
+    color: ${({ theme }) => theme.COLORS.WHITE};
     -webkit-font-smoothing:antialiased;
   }
   body,input,button{
-    font-family:'Roboto', serif;
+    font-family: 'Roboto', serif;
     font-size:1rem;
   }
   h1,h2,h3,h4,h5,h6,strong {

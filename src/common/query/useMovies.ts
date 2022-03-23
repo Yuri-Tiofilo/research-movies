@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query'
 
 import { baseConfig } from 'common/constants'
-import { api } from 'common/services/api'
+import api from 'common/services/api'
 
 async function loadMovies(page: string) {
   try {

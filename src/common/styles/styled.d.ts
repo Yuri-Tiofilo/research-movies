@@ -21,7 +21,6 @@ declare module 'styled-components' {
       WARNING?: string
       ERROR?: string
       SUCESS?: string
-      BACKGROUND_RED?: string
     }
   }
 }

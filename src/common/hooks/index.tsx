@@ -1,7 +1,10 @@
 import React from 'react'
 import { AuthProvider } from './auth'
+import { MoviesProvider } from './movies'
 
 const AppProvider: React.FC = ({ children }) => (
-  <AuthProvider>{children}</AuthProvider>
+  <AuthProvider>
+    <MoviesProvider>{children}</MoviesProvider>
+  </AuthProvider>
 )
 export default AppProvider

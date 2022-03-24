@@ -8,4 +8,8 @@ const baseConfig = {
   ts: process.env.REACT_APP_TS
 }
 
-export { baseConfig, env }
+const defaultUrlImage = {
+  default: 'https://image.tmdb.org/t/p/w300'
+}
+
+export { baseConfig, env, defaultUrlImage }

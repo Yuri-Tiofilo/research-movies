@@ -12,7 +12,7 @@ const route = [
     isPrivate: false
   },
   {
-    path: '/dashboard',
+    path: '/home',
     component: Home,
     exact: true,
     isPrivate: true

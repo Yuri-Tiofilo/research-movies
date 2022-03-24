@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 export const Container = styled.div`
   max-width: 70rem;
@@ -17,6 +17,17 @@ export const Container = styled.div`
   }
 `
 
+const appearFromLeft = keyframes`
+  from {
+    opacity:0;
+    transform:translateX(100px);
+  }
+  to {
+    opacity:1;
+    transform:translateX(0)
+  }
+`
+
 export const Content = styled.div`
   max-width: 70rem;
   width: 100%;
@@ -24,6 +35,10 @@ export const Content = styled.div`
   margin: 20px auto;
 
   display: flex;
+
+  > div {
+    animation: ${appearFromLeft} 1s;
+  }
 
   @media screen and (max-width: 480px) {
     flex-direction: column;

@@ -1,9 +1,22 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const appearFromLeft = keyframes`
+  from {
+    opacity:0;
+    transform:translateX(-100px);
+  }
+  to {
+    opacity:1;
+    transform:translateX(0)
+  }
+`
 
 export const Container = styled.section`
   padding-right: 80px;
 
   width: 70%;
+
+  animation: ${appearFromLeft} 1s;
 
   @media screen and (max-width: 480px) {
     width: 100%;

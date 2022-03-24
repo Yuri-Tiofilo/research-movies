@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  max-width: 70rem;
+  margin: 60px auto;
+  padding: 0 2rem;
+
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  flex-direction: column;
 `
 
 export const Content = styled.div`

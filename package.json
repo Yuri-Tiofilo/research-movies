@@ -32,6 +32,7 @@
     "react-toastify": "^8.2.0",
     "styled-components": "^5.1.0",
     "typescript": "~3.7.2",
+    "uuidv4": "^6.2.12",
     "yarn": "^1.22.18"
   },
   "scripts": {

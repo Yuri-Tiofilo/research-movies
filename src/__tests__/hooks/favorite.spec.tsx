@@ -1,9 +1,9 @@
 import { renderHook, act } from '@testing-library/react-hooks'
 import MockAdapter from 'axios-mock-adapter'
 
-import { FavoriteProvider, useFavorites } from '../../hooks/favorites'
+import { FavoriteProvider, useFavorites } from 'common/hooks/favorites'
 
-import api from '../../common/services/api'
+import api from 'common/services/api'
 
 const apiMock = new MockAdapter(api)
 

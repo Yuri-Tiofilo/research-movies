@@ -8,17 +8,20 @@ const route = [
   {
     path: '/',
     component: Welcome,
-    exact: true
+    exact: true,
+    isPrivate: false
   },
   {
     path: '/dashboard',
     component: Home,
-    exact: true
+    exact: true,
+    isPrivate: true
   },
   {
     path: '/details/:id',
     component: Details,
-    exact: true
+    exact: true,
+    isPrivate: true
   }
 ]
 

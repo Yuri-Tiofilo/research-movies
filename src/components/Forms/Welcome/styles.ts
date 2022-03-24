@@ -2,6 +2,18 @@ import styled from 'styled-components'
 
 export const Container = styled.section`
   padding-right: 80px;
+
+  width: 70%;
+
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    padding-right: 0px;
+  }
+
+  @media screen and (min-width: 481px) and (max-width: 1023px) {
+    width: 100%;
+    padding-right: 0px;
+  }
 `
 
 export const ContentTitle = styled.div`
@@ -28,9 +40,32 @@ export const ContentTitle = styled.div`
 
     margin-bottom: 15px;
 
-    span {
+    > span {
       color: ${({ theme }) => theme.COLORS.PRIMARY};
       font-weight: bold;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 100%;
+
+    h1 {
+      font-size: 3.125rem;
+      line-height: 3rem;
+      font-weight: 900;
+      margin-top: 2rem;
+
+      margin-bottom: 2rem;
+    }
+  }
+
+  @media screen and (min-width: 481px) and (max-width: 1023px) {
+    width: 100%;
+
+    h1 {
+      font-size: 3.725rem;
+      line-height: 3.725rem;
+      font-weight: 900;
     }
   }
 `

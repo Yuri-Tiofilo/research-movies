@@ -1,13 +1,38 @@
 import React from 'react'
-import Logo from 'assets/logo.svg'
 
-import { Container, Content } from './styles'
+import Logo from 'assets/logo.svg'
+import { useAuth } from 'common/hooks/auth'
+
+import { FiLogOut } from 'react-icons/fi'
+
+import { Container, Content, Avatar } from './styles'
 
 const Header: React.FC = () => {
+  const { user, signOut } = useAuth()
   return (
     <Container>
       <Content>
-        <img src={Logo} alt="Logo" width={150} height={120} />
+        <img src={Logo} alt="Logo" />
+
+        {!!user && (
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Avatar>{user.name.slice(0, 1)}</Avatar>
+
+            <button
+              style={{
+                background: 'transparent',
+                color: '#fff',
+                marginLeft: 20,
+                display: 'flex',
+                alignItems: 'center'
+              }}
+              onClick={() => signOut()}
+            >
+              Trocar
+              <FiLogOut style={{ marginLeft: 10 }} />
+            </button>
+          </div>
+        )}
       </Content>
     </Container>
   )

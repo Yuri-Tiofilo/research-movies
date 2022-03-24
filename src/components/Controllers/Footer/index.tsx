@@ -5,7 +5,9 @@ import { Container } from './styles'
 const Footer: React.FC = () => {
   return (
     <Container>
-      <span>By Yuri Silva 🚀❤️</span>
+      <span role="img" aria-label="Foguete">
+        By Yuri Silva 🚀❤️
+      </span>
     </Container>
   )
 }

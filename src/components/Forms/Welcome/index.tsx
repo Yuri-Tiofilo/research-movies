@@ -29,9 +29,11 @@ const WelcomeForm: React.FC = () => {
   }
 
   return (
-    <Container style={{ width: '70%' }}>
+    <Container>
       <ContentTitle>
-        <span>👏 Hey, welcome</span>
+        <span role="img" aria-label="Check">
+          👏 Hey, welcome
+        </span>
         <h1>
           New online<span> Movie</span> finder.
         </h1>

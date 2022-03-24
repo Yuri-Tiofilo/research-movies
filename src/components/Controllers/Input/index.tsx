@@ -33,7 +33,7 @@ const Input: React.FC<InputProps> = ({ icon: Icon, ...rest }) => {
       isFocused={isFocused}
       data-testid="input-container"
     >
-      {Icon && <Icon size={20} />}
+      {Icon && <Icon size={20} style={{ marginRight: 10 }} />}
       <input
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}

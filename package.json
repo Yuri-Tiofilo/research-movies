@@ -1,5 +1,5 @@
 {
-  "name": "marvel-search-heros",
+  "name": "search-movies",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -96,5 +96,9 @@
     "husky": "^7.0.4",
     "prettier": "^2.1.1",
     "react-test-renderer": "^16.13.1"
+  },
+  "author": {
+    "name": "Yuri Silva",
+    "email": "dev.yuritiofilo@gmail.com"
   }
 }

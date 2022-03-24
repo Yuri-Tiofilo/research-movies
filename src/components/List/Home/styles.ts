@@ -1,10 +1,21 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import Favorite from 'assets/favorito_02.svg'
 import FavoriteHover from 'assets/favorito_01.svg'
 
 type PropsButtonFavorite = {
   isActive?: boolean
 }
+
+const appearFromY = keyframes`
+  from {
+    opacity:0;
+    transform:translateY(100px);
+  }
+  to {
+    opacity:1;
+    transform:translateY(0)
+  }
+`
 
 export const Container = styled.ul`
   display: grid;
@@ -14,6 +25,9 @@ export const Container = styled.ul`
   width: 100%;
   margin-top: 10px;
   margin: 0 auto;
+
+  animation: ${appearFromY} 2s;
+  z-index: 0;
 
   @media screen and (max-width: 480px) {
     grid-template-columns: repeat(2, 1fr);
@@ -41,7 +55,8 @@ export const Container = styled.ul`
       color: #333;
     }
     > div {
-      display: none;
+      opacity: 0;
+      padding: 8px 0;
     }
     div h3 {
       font-size: 16px;
@@ -77,7 +92,7 @@ export const Container = styled.ul`
     }
 
     &:hover {
-      transform: scale(1.3);
+      transform: scale(1.2);
       z-index: 1;
 
       background: #020202;
@@ -85,9 +100,9 @@ export const Container = styled.ul`
       box-shadow: 0 0 0.5em red;
 
       > div {
-        display: flex;
+        /* display: flex; */
+        opacity: 1;
 
-        padding: 8px 0;
         text-align: center;
       }
     }

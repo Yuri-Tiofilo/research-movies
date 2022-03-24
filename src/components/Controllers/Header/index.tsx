@@ -9,14 +9,17 @@ import { Container, Content, Avatar } from './styles'
 
 const Header: React.FC = () => {
   const { user, signOut } = useAuth()
+
   return (
     <Container>
       <Content>
-        <img src={Logo} alt="Logo" />
+        <img src={Logo} alt="Logo" arial-label="Logo do site" />
 
         {!!user && (
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <Avatar>{user.name.slice(0, 1)}</Avatar>
+            <Avatar arial-label="Avatar Usuário">
+              {user.name.slice(0, 1)}
+            </Avatar>
 
             <button
               style={{
@@ -27,6 +30,7 @@ const Header: React.FC = () => {
                 alignItems: 'center'
               }}
               onClick={() => signOut()}
+              arial-label="Sair deste usuário"
             >
               Trocar
               <FiLogOut style={{ marginLeft: 10 }} />

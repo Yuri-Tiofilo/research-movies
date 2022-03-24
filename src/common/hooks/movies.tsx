@@ -9,13 +9,13 @@ import {
 import { queryClient } from 'common/services/query'
 
 interface MoviesContextData {
-  favorites: []
   data: DataAPIMovies | undefined
   isFetching: boolean
   error: unknown
   loading: boolean
+  currentPage: number
 
-  handlePage(page: string, previous: boolean): void
+  handlePage(page: number, previous: boolean): void
   searchMovies(value: string, page: string): void
 }
 
@@ -29,25 +29,35 @@ const MoviesProvider: React.FC = ({ children }) => {
     page: String(currentPage)
   })
 
+  async function fetchQuery(query: string) {
+    await queryClient.fetchQuery<DataAPIMovies>('movies', () =>
+      loadMoviesQuery(String(query))
+    )
+  }
+
   const handlePage = useCallback(
-    async (page = '1', previous) => {
+    async (current, previous) => {
       setLoading(true)
+
+      let currentQuery: string | null | number = null
 
       if (data) {
         if (previous) {
-          if (currentPage > data?.total_pages) {
+          if (currentPage < data.total_pages) {
             setCurrentPage(prevState => prevState + 1)
+            currentQuery = current + 1
           }
+
+          fetchQuery(String(currentQuery))
         } else {
           if (currentPage > 1) {
             setCurrentPage(prevState => prevState - 1)
+            currentQuery = current - 1
+
+            fetchQuery(String(currentQuery))
           }
         }
       }
-
-      await queryClient.fetchQuery<DataAPIMovies>('movies', () =>
-        loadMoviesQuery(page)
-      )
 
       setLoading(false)
     },
@@ -65,13 +75,13 @@ const MoviesProvider: React.FC = ({ children }) => {
   return (
     <MoviesContext.Provider
       value={{
-        favorites: [],
         data,
         isFetching,
         error,
         handlePage,
         loading,
-        searchMovies
+        searchMovies,
+        currentPage
       }}
     >
       {children}

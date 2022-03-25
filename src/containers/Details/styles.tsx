@@ -24,4 +24,48 @@ export const Container = styled.div<Props>`
   color: ${({ theme }) => theme.COLORS.WHITE};
 `
 
-export const Content = styled.div``
+export const Content = styled.div`
+  max-width: 60rem;
+
+  margin: 0 auto;
+  display: flex;
+  width: 100%;
+
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+
+    align-items: center;
+    img {
+      width: 200px;
+    }
+  }
+`
+
+export const Box = styled.section`
+  width: 60%;
+
+  margin-right: 60px;
+
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    margin-right: 0px;
+
+    padding: 15px;
+  }
+
+  @media screen and (min-width: 481px) and (max-width: 1023px) {
+    width: 100%;
+    margin-right: 0px;
+
+    padding: 25px;
+  }
+`
+
+export const Description = styled.p`
+  text-align: justify;
+
+  margin-top: 30px;
+
+  line-height: 1.3rem;
+  color: ${({ theme }) => theme.COLORS.WHITE300};
+`

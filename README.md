@@ -33,10 +33,10 @@ git push origin main // CI/CD Netlify
 ### Images Web
 
 <div style="display: flex;flex-direction: row;">
-  <image src="./images/image1.png" style="width: 500px">
-  <image src="./images/image2.png" style="width: 500px">
-  <image src="./images/image3.png" style="width: 500px">
-  <image src="./images/image4.png" style="width: 500px">
+  <image src="./images/image1.png" style="width: 400px">
+  <image src="./images/image2.png" style="width: 400px">
+  <image src="./images/image3.png" style="width: 400px">
+  <image src="./images/image4.png" style="width: 400px">
 </div>
     
 ### Images Mobile

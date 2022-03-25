@@ -6,6 +6,7 @@ import { useAuth } from 'common/hooks/auth'
 import { FiLogOut } from 'react-icons/fi'
 
 import { Container, Content, Avatar } from './styles'
+import { Link } from 'react-router-dom'
 
 const Header: React.FC = () => {
   const { user, signOut } = useAuth()
@@ -13,7 +14,9 @@ const Header: React.FC = () => {
   return (
     <Container>
       <Content>
-        <img src={Logo} alt="Logo" arial-label="Logo do site" />
+        <Link to="/home">
+          <img src={Logo} alt="Logo" arial-label="Logo do site" />
+        </Link>
 
         {!!user && (
           <div style={{ display: 'flex', alignItems: 'center' }}>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { FiSearch } from 'react-icons/fi'
 
-import { useMovies } from 'common/hooks/movies'
 import { Input } from 'components'
 
 import { Container, Form } from './styles'
@@ -13,16 +12,13 @@ type Props = {
 
 const Search = ({ totalResults }: Props) => {
   const [searchState, setSearchState] = useState('')
-  const { searchMovies } = useMovies()
   const location = useLocation()
 
   function search(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    if (location.pathname === '/home') {
+    if (location.pathname === '/home' || location.pathname === '/search') {
       if (searchState !== '') {
-        searchMovies(searchState, '1')
-
-        // window.location.href = `/search?name=${searchState}`
+        window.location.href = `/search?name=${searchState}`
       }
     }
   }

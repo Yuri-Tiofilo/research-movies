@@ -1,30 +1,74 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useLocation } from 'react-router-dom'
 
-import { H1, Header, HomeList } from 'components'
+import {
+  H1,
+  Header,
+  HomeList,
+  Pagination,
+  Search as SearchComponent
+} from 'components'
 
-import { Container } from './styles'
+import { Container, Content } from './styles'
 import { searchInputMovies } from 'common/query/useMovies'
 import { queryClient } from 'common/services/query'
 import { DataAPIMovies } from 'common/interfaces/movies'
 
 const Search = () => {
+  const [currentPage, setCurrentPage] = useState(1)
+  const [loading, setLoading] = useState(false)
   const location = useLocation()
   const query = new URLSearchParams(location.search)
 
   const [data, setData] = useState<DataAPIMovies>({} as DataAPIMovies)
 
-  async function loadSearch() {
-    const response = await queryClient.fetchQuery<DataAPIMovies>(
-      'movies-search',
-      () => searchInputMovies(String(query.get('name')), '1')
-    )
+  async function loadSearch(page: number) {
+    if (query.get('name') && query.get('name') !== '') {
+      setLoading(true)
+      const response = await queryClient.fetchQuery<DataAPIMovies>(
+        'movies-search',
+        () => searchInputMovies(String(query.get('name')), String(page))
+      )
 
-    setData(response)
+      setData(response)
+      setLoading(false)
+    } else {
+      window.location.href = '/home'
+    }
   }
 
+  const handlePage = useCallback(
+    async (current: number, previous: boolean) => {
+      setLoading(true)
+
+      let currentQuery = 1
+
+      if (data) {
+        if (previous) {
+          if (currentPage < data.total_pages) {
+            setCurrentPage(prevState => prevState + 1)
+            currentQuery = current + 1
+          }
+
+          loadSearch(currentQuery)
+        } else {
+          if (currentPage > 1) {
+            setCurrentPage(prevState => prevState - 1)
+            currentQuery = current - 1
+
+            loadSearch(currentQuery)
+          }
+        }
+      }
+
+      setLoading(false)
+    },
+    // eslint-disable-next-line
+    [data, currentPage]
+  )
+
   useEffect(() => {
-    loadSearch()
+    loadSearch(1)
     // eslint-disable-next-line
   }, [])
 
@@ -32,9 +76,23 @@ const Search = () => {
     <Container>
       <Header />
 
-      <H1>Resultados por: {query.get('name')}</H1>
+      {loading ? (
+        <div>Loading..</div>
+      ) : (
+        <Content>
+          <SearchComponent totalResults={data && data.total_results} />
+          <H1>Resultados por: {query.get('name')}</H1>
 
-      <HomeList data={data.results} />
+          <HomeList data={data && data.results} />
+
+          {data && data.total_pages !== 1 && (
+            <Pagination
+              handleMoreResults={previous => handlePage(currentPage, previous)}
+              currentPage={currentPage}
+            />
+          )}
+        </Content>
+      )}
     </Container>
   )
 }

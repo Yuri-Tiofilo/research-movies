@@ -47,31 +47,71 @@ export const Container = styled.ul`
     justify-content: center;
     align-items: center;
     border-radius: 4px;
-    transition: transform 500ms;
-    /* padding: 20px; */
-    > strong {
-      font-size: 16px;
-      line-height: 20px;
-      color: #333;
-    }
-    > div {
+
+    .stars {
       opacity: 0;
+      position: absolute;
+
+      /* bottom: 0px; */
+      left: 5px;
+    }
+
+    .card {
+      .info-box {
+        opacity: 0;
+        padding: 8px;
+
+        position: relative;
+      }
+      display: flex;
+      transition: transform 500ms;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 4px;
+      &:hover {
+        transform: scale(1.125);
+        z-index: 1;
+
+        background: #020202;
+        padding: 8px 0;
+        box-shadow: 0 0 0.5em red;
+        .info-box {
+          opacity: 1;
+          text-align: center;
+        }
+
+        .stars {
+          opacity: 1;
+        }
+      }
+    }
+
+    > div {
       padding: 8px 0;
     }
     div h3 {
       font-size: 16px;
       color: #fff;
-      /* font-weight: bold; */
     }
     img {
       height: 260px;
       width: 200px;
+
+      /* position: relative; */
     }
     @media screen and (max-width: 480px) {
-      > div {
-        display: flex;
-        padding: 8px;
-        justify-content: space-between;
+      .card {
+        .info-box {
+          display: flex;
+          padding: 8px;
+          opacity: 1;
+          justify-content: space-between;
+          text-align: center;
+        }
+        .stars {
+          opacity: 1;
+        }
       }
       img {
         height: 180px;
@@ -79,31 +119,21 @@ export const Container = styled.ul`
       }
     }
     @media screen and (min-width: 480px) and (max-width: 1023px) {
-      > div {
-        display: flex;
-        padding: 20px 5px 20px 0px;
-        justify-content: space-between;
+      .card {
+        .info-box {
+          display: flex;
+          padding: 20px 5px 20px 0px;
+          justify-content: space-between;
+          text-align: center;
+        }
+        .stars {
+          opacity: 1;
+        }
       }
+
       div h3 {
         font-size: 18px;
-        /* font-weight: bold; */
         margin-right: 20px;
-      }
-    }
-
-    &:hover {
-      transform: scale(1.2);
-      z-index: 1;
-
-      background: #020202;
-      padding: 5px 0;
-      box-shadow: 0 0 0.5em red;
-
-      > div {
-        /* display: flex; */
-        opacity: 1;
-
-        text-align: center;
       }
     }
   }

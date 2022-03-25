@@ -6,6 +6,7 @@ export * from './Controllers/Footer'
 export * from './Controllers/Button'
 export * from './Controllers/Pagination'
 export * from './Controllers/Filters/Search'
+export * from './Controllers/H1'
 
 export * from './Forms/Welcome'
 

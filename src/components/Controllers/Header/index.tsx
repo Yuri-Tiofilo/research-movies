@@ -33,7 +33,7 @@ const Header: React.FC = () => {
               arial-label="Sair deste usuário"
             >
               Trocar
-              <FiLogOut style={{ marginLeft: 10 }} />
+              <FiLogOut style={{ marginLeft: 10 }} arial-label="Icone Sair" />
             </button>
           </div>
         )}

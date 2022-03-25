@@ -21,6 +21,12 @@ export const Container = styled.div`
   b {
     color: ${({ theme }) => theme.COLORS.WHITE};
   }
+
+  @media screen and (max-width: 480px) {
+    flex-direction: column-reverse;
+
+    padding: 20px;
+  }
 `
 
 export const Form = styled.form`

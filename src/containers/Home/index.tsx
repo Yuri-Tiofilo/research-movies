@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Footer, Header, HomeList, Pagination, Search } from 'components'
+import { Footer, H1, Header, HomeList, Pagination, Search } from 'components'
 import { useMovies } from 'common/hooks/movies'
 
 import { Container, Content } from './styles'
@@ -15,7 +15,6 @@ const Home = () => {
       window.scrollTo(0, 0)
     }
   }
-
   return (
     <Container>
       <Header />
@@ -27,13 +26,15 @@ const Home = () => {
           <>
             <Search totalResults={data?.total_results} />
 
-            <h1 style={{ margin: '20px 0px' }}>Últimos filmes</h1>
+            <H1 arial-label="Últimos filmes">Últimos filmes</H1>
             {data && <HomeList data={data.results} />}
 
-            <Pagination
-              handleMoreResults={previous => paginate(previous)}
-              currentPage={currentPage}
-            />
+            {data && data.total_pages !== 1 && (
+              <Pagination
+                handleMoreResults={previous => paginate(previous)}
+                currentPage={currentPage}
+              />
+            )}
           </>
         )}
       </Content>

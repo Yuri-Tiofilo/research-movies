@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 type Props = {
-  posterPath: string
+  pathImageBackground: string | undefined
 }
 
 export const Container = styled.div<Props>`
@@ -13,15 +13,15 @@ export const Container = styled.div<Props>`
         rgba(0, 0, 0, 0.92) 80%,
         rgba(0, 0, 0, 0.97) 100%
       ),
-      no-repeat center center url(${({ posterPath }) => posterPath});
+      no-repeat center center
+        url(${({ pathImageBackground }) => pathImageBackground});
     background-size: cover;
     height: 100vh;
     font-size: 1rem;
     display: flex;
-    background-color: #2c3949;
     align-items: center;
   }
-  color: #fff;
+  color: ${({ theme }) => theme.COLORS.WHITE};
 `
 
 export const Content = styled.div``

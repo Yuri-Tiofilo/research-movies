@@ -28,6 +28,13 @@ export async function searchInputMovies(value: string, page: string) {
   }
 }
 
+export async function getDetails(id: number) {
+  const { data } = await api.get(
+    `movie/${id}?api_key=${baseConfig.apiKey}&language=pt-BR`
+  )
+  return data
+}
+
 export function useMoviesQuery({ page = '1' }) {
   return useQuery<DataAPIMovies>('movies', () => loadMoviesQuery(page))
 }

@@ -69,6 +69,7 @@ const MoviesProvider: React.FC = ({ children }) => {
     await queryClient.fetchQuery<DataAPIMovies>('movies', () =>
       searchInputMovies(value, page)
     )
+
     setLoading(false)
   }, [])
 

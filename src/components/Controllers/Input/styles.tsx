@@ -30,6 +30,7 @@ export const Container = styled.div<ContainerProps>`
     flex: 1;
     background: transparent;
     border: 0;
+
     &::placeholder {
       color: ${({ theme }) => theme.COLORS.SUBTEXT};
     }

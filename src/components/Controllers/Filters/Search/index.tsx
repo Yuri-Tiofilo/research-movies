@@ -36,6 +36,7 @@ const Search = ({ totalResults }: Props) => {
       </div>
       <Form onSubmit={e => search(e)}>
         <Input
+          aria-label="Pesquisar por filme"
           name="search"
           icon={FiSearch}
           value={searchState}

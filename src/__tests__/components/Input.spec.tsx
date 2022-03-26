@@ -1,18 +1,21 @@
 import React from 'react'
-
+import { ThemeProvider } from 'styled-components'
 import { render, fireEvent, wait } from '@testing-library/react'
 import { Input } from '../../components/Controllers/Input'
+import theme from 'common/styles/theme'
 
 describe('Input Component', () => {
   it('should be able to render an input', () => {
     const { getByPlaceholderText } = render(
-      <Input
-        name="email"
-        placeholder="E-mail"
-        onBlur={() => {
-          return false
-        }}
-      />
+      <ThemeProvider theme={theme}>
+        <Input
+          name="email"
+          placeholder="E-mail"
+          onBlur={() => {
+            return false
+          }}
+        />
+      </ThemeProvider>
     )
 
     expect(getByPlaceholderText('E-mail')).toBeTruthy()
@@ -34,8 +37,8 @@ describe('Input Component', () => {
     fireEvent.focus(inputElement)
 
     await wait(() => {
-      expect(containerElement).toHaveStyle('border-color: transparent;')
-      expect(containerElement).toHaveStyle('color: #ff0000')
+      expect(containerElement).toHaveStyle('border-color: #E80202')
+      expect(containerElement).toHaveStyle('color: #fff')
     })
 
     fireEvent.blur(inputElement)
@@ -61,7 +64,7 @@ describe('Input Component', () => {
     const containerElement = getByTestId('input-container')
 
     fireEvent.change(inputElement, {
-      target: { value: 'yuri@incca.com.br' }
+      target: { value: 'yuri@quero2pay.com.br' }
     })
 
     await wait(() => {

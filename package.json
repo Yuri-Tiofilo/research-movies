@@ -14,6 +14,7 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "axios": "^0.19.2",
+    "cypress": "^9.5.2",
     "date-fns": "^2.14.0",
     "global": "^4.4.0",
     "i18next": "^21.6.14",
@@ -50,9 +51,9 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/pages/**/*.tsx",
+      "src/containers/**/*.tsx",
       "src/components/**/*.tsx",
-      "src/hooks/**/*.tsx",
+      "src/common/hooks/**/*.tsx",
       "!src/hooks/index.tsx"
     ]
   },

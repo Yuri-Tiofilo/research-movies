@@ -7,7 +7,7 @@ import api from 'common/services/api'
 
 const apiMock = new MockAdapter(api)
 
-describe('Auth Hook', () => {
+describe('Movies Hook', () => {
   it('should be able to sign in', async () => {
     const apiResponse = {
       user: {

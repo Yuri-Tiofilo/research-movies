@@ -2,7 +2,7 @@
 
 <!-- ##### Link de produção: https://marvel-search-heros-app.netlify.app/ -->
 
-## Ao clonar crie um ``.env`` semelhante ao ``.env.example`` 
+#### Ao clonar crie um ``.env`` semelhante ao ``.env.example`` 
 
 ## Como rodar o projeto:
 

@@ -1,17 +1,12 @@
 import { renderHook, act } from '@testing-library/react-hooks'
-import MockAdapter from 'axios-mock-adapter'
 
 import { AuthProvider, useAuth } from 'common/hooks/auth'
-
-import api from 'common/services/api'
-
-const apiMock = new MockAdapter(api)
 
 describe('Auth Hook', () => {
   it('should be able to sign in', async () => {
     const setItemSpy = jest.spyOn(Storage.prototype, 'setItem')
 
-    const { result, waitForNextUpdate } = renderHook(() => useAuth(), {
+    const { result } = renderHook(() => useAuth(), {
       wrapper: AuthProvider
     })
 
@@ -19,11 +14,12 @@ describe('Auth Hook', () => {
       name: 'Yuri Silva'
     })
 
-    await waitForNextUpdate()
-
     expect(setItemSpy).toHaveBeenCalledWith(
       'MoviesSearch:user',
-      JSON.stringify({ name: result.current.user.name, id: 'id-123' })
+      JSON.stringify({
+        name: result.current.user.name,
+        id: result.current.user.id
+      })
     )
     expect(result.current.user.name).toEqual('Yuri Silva')
   })
@@ -33,7 +29,6 @@ describe('Auth Hook', () => {
       switch (key) {
         case 'MoviesSearch:user':
           return JSON.stringify({
-            id: 'id-123',
             name: 'Yuri Silva'
           })
         default:
@@ -71,7 +66,7 @@ describe('Auth Hook', () => {
       result.current.signOut()
     })
 
-    expect(removeItemSpy).toHaveBeenCalledTimes(2)
+    expect(removeItemSpy).toHaveBeenCalledTimes(1)
     expect(result.current.user).toBeUndefined()
   })
 })

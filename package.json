@@ -40,7 +40,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "test:coverage": "react-app-rewired test --coverage --watchAll false",
+    "test:coverage": "react-app-rewired test --coverage --watchAll false --collectCoverageFrom=src/common/hooks/**/*.tsx",
     "eject": "react-app-rewired eject",
     "commit": "git-cz",
     "prepare": "husky install",
@@ -51,8 +51,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/common/hooks/movies.tsx",
-      "!src/hooks/index.tsx"
+      "src/common/hooks/**/*.tsx"
     ]
   },
   "browserslist": {

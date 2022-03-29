@@ -1,125 +1,100 @@
+import React from 'react'
 import { renderHook, act } from '@testing-library/react-hooks'
-import MockAdapter from 'axios-mock-adapter'
 
-import { FavoriteProvider, useFavorites } from 'common/hooks/favorites'
+import { MoviesProvider, useMovies } from 'common/hooks/movies'
 
-import api from 'common/services/api'
-
-const apiMock = new MockAdapter(api)
+import { queryClient } from 'common/services/query'
+import { QueryClientProvider } from 'react-query'
+import { AuthProvider } from 'common/hooks/auth'
 
 describe('Movies Hook', () => {
-  it('should be able to sign in', async () => {
-    const apiResponse = {
-      user: {
-        id: 'user-123',
-        name: 'yuri silva',
-        email: 'yuri@incca.com.br'
-      },
+  it('should be able to fetch the movies', async () => {
+    const Wrapper: React.FC = ({ children }) => (
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <MoviesProvider>{children}</MoviesProvider>
+        </AuthProvider>
+      </QueryClientProvider>
+    )
 
-      token: 'token-123'
-    }
-
-    apiMock.onPost('sessions').reply(200, apiResponse)
-
-    const setItemSpy = jest.spyOn(Storage.prototype, 'setItem')
-
-    const { result, waitForNextUpdate } = renderHook(() => useFavorites(), {
-      wrapper: FavoriteProvider
-    })
-
-    result.current.favorites({
-      email: 'yuri@incca.com.br',
-      password: '123456'
+    const { result, waitForNextUpdate } = renderHook(() => useMovies(), {
+      wrapper: Wrapper
     })
 
     await waitForNextUpdate()
 
-    expect(setItemSpy).toHaveBeenCalledWith(
-      '@GoBarber:token',
-      apiResponse.token
-    )
-    expect(setItemSpy).toHaveBeenCalledWith(
-      '@GoBarber:user',
-      JSON.stringify(apiResponse.user)
-    )
-    expect(result.current.user.email).toEqual('yuri@incca.com.br')
+    expect(result.current.isFetching).toBeFalsy()
+    expect(result.current.error).toBeNull()
+    expect(result.current.data).not.toBeUndefined()
   })
 
-  it('should restore saved data from storage when auth inits', () => {
-    jest.spyOn(Storage.prototype, 'getItem').mockImplementation(key => {
-      switch (key) {
-        case '@GoBarber:token':
-          return 'token-123'
-        case '@GoBarber:user':
-          return JSON.stringify({
-            id: 'user-123',
-            name: 'yuri silva',
-            email: 'yuri@incca.com.br'
-          })
-        default:
-          return null
-      }
-    })
-
-    const { result } = renderHook(() => useFavorites(), {
-      wrapper: FavoriteProvider
-    })
-
-    expect(result.current.user.email).toEqual('yuri@incca.com.br')
-  })
-
-  it('should be able to sign out', async () => {
-    jest.spyOn(Storage.prototype, 'getItem').mockImplementation(key => {
-      switch (key) {
-        case '@GoBarber:token':
-          return 'token-123'
-        case '@GoBarber:user':
-          return JSON.stringify({
-            id: 'user-123',
-            name: 'yuri silva',
-            email: 'yuri@incca.com.br'
-          })
-        default:
-          return null
-      }
-    })
-
-    const removeItemSpy = jest.spyOn(Storage.prototype, 'removeItem')
-
-    const { result } = renderHook(() => useFavorites(), {
-      wrapper: FavoriteProvider
-    })
-
-    act(() => {
-      result.current.signOut()
-    })
-
-    expect(removeItemSpy).toHaveBeenCalledTimes(2)
-    expect(result.current.user).toBeUndefined()
-  })
-
-  it('should be able update user data', async () => {
-    const setItemSpy = jest.spyOn(Storage.prototype, 'setItem')
-    const { result } = renderHook(() => useFavorites(), {
-      wrapper: FavoriteProvider
-    })
-
-    const user = {
-      id: 'user-123',
-      name: 'yuri silva',
-      email: 'yuri@incca.com.br',
-      avatar_url: 'image-test.png'
-    }
-
-    act(() => {
-      result.current.updateUser(user)
-    })
-
-    expect(setItemSpy).toHaveBeenCalledWith(
-      '@GoBarber:user',
-      JSON.stringify(user)
+  it('must be able to change the data from the pagination', async () => {
+    const Wrapper: React.FC = ({ children }) => (
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <MoviesProvider>{children}</MoviesProvider>
+        </AuthProvider>
+      </QueryClientProvider>
     )
 
-    expect(result.current.user).toEqual(user)
+    const { result, waitForNextUpdate } = renderHook(() => useMovies(), {
+      wrapper: Wrapper
+    })
+
+    await waitForNextUpdate()
+
+    const current = 2
+    const prev = true
+
+    await act(() => result.current.handlePage(current, prev))
+
+    await waitForNextUpdate()
+
+    expect(result.current.currentPage).toEqual(2)
+  })
+
+  it('must be able to change the data from the pagination, currentPage > 1', async () => {
+    const Wrapper: React.FC = ({ children }) => (
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <MoviesProvider>{children}</MoviesProvider>
+        </AuthProvider>
+      </QueryClientProvider>
+    )
+
+    const { result, waitForNextUpdate } = renderHook(() => useMovies(), {
+      wrapper: Wrapper
+    })
+
+    await waitForNextUpdate()
+
+    const current = 8
+    const prev = false
+
+    result.current.setCurrentPage(9)
+
+    await act(() => result.current.handlePage(current, prev))
+
+    await waitForNextUpdate()
+
+    expect(result.current.currentPage).toEqual(8)
+  })
+
+  it('featch search query in API', async () => {
+    const Wrapper: React.FC = ({ children }) => (
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <MoviesProvider>{children}</MoviesProvider>
+        </AuthProvider>
+      </QueryClientProvider>
+    )
+
+    const { result, waitForNextUpdate } = renderHook(() => useMovies(), {
+      wrapper: Wrapper
+    })
+
+    await waitForNextUpdate()
+
+    await act(() => result.current.searchMovies('hulk', String(1)))
   })
 })

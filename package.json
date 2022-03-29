@@ -51,9 +51,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/containers/**/*.tsx",
-      "src/components/**/*.tsx",
-      "src/common/hooks/**/*.tsx",
+      "src/common/hooks/movies.tsx",
       "!src/hooks/index.tsx"
     ]
   },

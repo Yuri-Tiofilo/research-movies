@@ -17,6 +17,7 @@ interface MoviesContextData {
 
   handlePage(page: number, previous: boolean): void
   searchMovies(value: string, page: string): void
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>
 }
 
 const MoviesContext = createContext<MoviesContextData>({} as MoviesContextData)
@@ -36,7 +37,7 @@ const MoviesProvider: React.FC = ({ children }) => {
   }
 
   const handlePage = useCallback(
-    async (current, previous) => {
+    async (current: number, previous: boolean) => {
       setLoading(true)
 
       let currentQuery: string | null | number = null
@@ -47,16 +48,13 @@ const MoviesProvider: React.FC = ({ children }) => {
             setCurrentPage(prevState => prevState + 1)
             currentQuery = current + 1
           }
-
-          fetchQuery(String(currentQuery))
         } else {
           if (currentPage > 1) {
             setCurrentPage(prevState => prevState - 1)
             currentQuery = current - 1
-
-            fetchQuery(String(currentQuery))
           }
         }
+        fetchQuery(String(currentQuery))
       }
 
       setLoading(false)
@@ -82,7 +80,8 @@ const MoviesProvider: React.FC = ({ children }) => {
         handlePage,
         loading,
         searchMovies,
-        currentPage
+        currentPage,
+        setCurrentPage
       }}
     >
       {children}

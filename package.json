@@ -40,7 +40,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "test:coverage": "react-app-rewired test --coverage --watchAll false --collectCoverageFrom=src/common/hooks/**/*.tsx",
+    "test:coverage": "react-app-rewired test --coverage --watchAll false --collectCoverageFrom=src/common/hooks/**/*.tsx --collectCoverageFrom=src/components/Controllers/**/*.tsx --collectCoverageFrom=src/common/hooks/**/*.tsx --collectCoverageFrom=src/components/Forms/**/*.tsx",
     "eject": "react-app-rewired eject",
     "commit": "git-cz",
     "prepare": "husky install",

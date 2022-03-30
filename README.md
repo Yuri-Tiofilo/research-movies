@@ -1,6 +1,6 @@
 # Search Movies
 
-<!-- ##### Link de produção: https://marvel-search-heros-app.netlify.app/ -->
+#### Link de produção: https://seacrh-movies-q2.netlify.app
 
 #### Ao clonar crie um ``.env`` semelhante ao ``.env.example`` 
 
@@ -28,6 +28,11 @@ yarn commit
 yarn build
 or
 git push origin main // CI/CD Netlify
+`````
+
+### Run Tests
+`````js
+yarn test:coverage
 `````
 
 ### Images Web

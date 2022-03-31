@@ -14,13 +14,19 @@ import { searchInputMovies } from 'common/query/useMovies'
 import { queryClient } from 'common/services/query'
 import { DataAPIMovies } from 'common/interfaces/movies'
 
+function useQuery() {
+  const { search } = useLocation()
+
+  return React.useMemo(() => new URLSearchParams(search), [search])
+}
+
 const Search = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [loading, setLoading] = useState(false)
-  const location = useLocation()
-  const query = new URLSearchParams(location.search)
 
   const [data, setData] = useState<DataAPIMovies>({} as DataAPIMovies)
+
+  const query = useQuery()
 
   async function loadSearch(page: number) {
     if (query.get('name') && query.get('name') !== '') {

@@ -10,7 +10,7 @@ import { defaultUrlImage } from 'common/constants'
 import { Results } from 'common/interfaces/details'
 import { getDetails } from 'common/query/useMovies'
 import { countStars } from 'common/utils'
-import { Categories, Footer, H1 } from 'components'
+import { Categories, Footer, H1, Seo } from 'components'
 
 import { Container, Content, Box, Description } from './styles'
 
@@ -29,6 +29,8 @@ const Details: React.FC = () => {
 
   return (
     <>
+      <Seo title={data ? data.title : 'Carregando...'} />
+
       {isFetching ? (
         <div>Loading...</div>
       ) : (

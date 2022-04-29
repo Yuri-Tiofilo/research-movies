@@ -8,6 +8,7 @@ export * from './Controllers/Pagination'
 export * from './Controllers/Filters/Search'
 export * from './Controllers/H1'
 export * from './Controllers/Categories'
+export * from './Controllers/SEO'
 
 export * from './Forms/Welcome'
 

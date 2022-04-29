@@ -9,7 +9,7 @@ type SeoProps = {
   image?: string
   shouldExcludeTitleSuffix?: boolean
   shouldIndexPage?: boolean
-  linkCanonical: string
+  linkCanonical?: string
 }
 
 const Seo = ({
@@ -20,19 +20,18 @@ const Seo = ({
   shouldIndexPage = true,
   linkCanonical = 'https://seacrh-movies-q2.netlify.app'
 }: SeoProps) => {
-  const pageTitle = `${title} ${
-    !shouldExcludeTitleSuffix ? '| Search Movies' : ''
-  }`
+  console.log('veio aqui no seo')
   return (
-    <Helmet>
-      <meta charSet="utf-8" />
-      {description && <meta name="description" content={description} />}
-      {image && <meta name="image" content={image} />}
-      <title>{title}</title>
-      <link rel="canonical" href={linkCanonical} />
+    <div>
+      <Helmet>
+        {description && <meta name="description" content={description} />}
+        {image && <meta name="image" content={image} />}
+        <title>{title}</title>
+        <link rel="canonical" href={linkCanonical} />
 
-      {!shouldIndexPage && <meta name="robots" content="noindex, nofollow" />}
-    </Helmet>
+        {!shouldIndexPage && <meta name="robots" content="noindex, nofollow" />}
+      </Helmet>
+    </div>
   )
 }
 

@@ -1,6 +1,14 @@
 import React from 'react'
 
-import { Footer, H1, Header, HomeList, Pagination, Search } from 'components'
+import {
+  Footer,
+  H1,
+  Header,
+  HomeList,
+  Pagination,
+  Search,
+  Seo
+} from 'components'
 import { useMovies } from 'common/hooks/movies'
 
 import { Container, Content } from './styles'
@@ -16,31 +24,35 @@ const Home = () => {
     }
   }
   return (
-    <Container>
-      <Header />
+    <>
+      {/* <Seo title="Home" /> */}
 
-      <Content>
-        {isFetching || loading ? (
-          <div>Loading...</div>
-        ) : (
-          <>
-            <Search totalResults={data?.total_results} />
+      <Container>
+        <Header />
 
-            <H1 arial-label="Últimos filmes">Últimos filmes</H1>
-            {data && <HomeList data={data.results} />}
+        <Content>
+          {isFetching || loading ? (
+            <div>Loading...</div>
+          ) : (
+            <>
+              <Search totalResults={data?.total_results} />
 
-            {data && data.total_pages !== 1 && (
-              <Pagination
-                handleMoreResults={previous => paginate(previous)}
-                currentPage={currentPage}
-              />
-            )}
-          </>
-        )}
-      </Content>
+              <H1 arial-label="Últimos filmes">Últimos filmes</H1>
+              {data && <HomeList data={data.results} />}
 
-      <Footer />
-    </Container>
+              {data && data.total_pages !== 1 && (
+                <Pagination
+                  handleMoreResults={previous => paginate(previous)}
+                  currentPage={currentPage}
+                />
+              )}
+            </>
+          )}
+        </Content>
+
+        <Footer />
+      </Container>
+    </>
   )
 }
 

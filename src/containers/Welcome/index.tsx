@@ -2,11 +2,12 @@ import React from 'react'
 import Image from 'assets/image-welcome.png'
 
 import { Container, Content } from './styles'
-import { WelcomeForm, Header } from 'components'
+import { WelcomeForm, Header, Seo } from 'components'
 
 const Welcome: React.FC = () => {
   return (
     <>
+      <Seo title="Bem-vindo" />
       <Header />
       <Container>
         <Content>

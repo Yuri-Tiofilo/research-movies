@@ -6,7 +6,8 @@ import {
   Header,
   HomeList,
   Pagination,
-  Search as SearchComponent
+  Search as SearchComponent,
+  Seo
 } from 'components'
 
 import { Container, Content } from './styles'
@@ -79,27 +80,32 @@ const Search = () => {
   }, [])
 
   return (
-    <Container>
-      <Header />
+    <>
+      <Seo title={String(query.get('name'))} />
+      <Container>
+        <Header />
 
-      {loading ? (
-        <div>Loading..</div>
-      ) : (
-        <Content>
-          <SearchComponent totalResults={data && data.total_results} />
-          <H1>Resultados por: {query.get('name')}</H1>
+        {loading ? (
+          <div>Loading..</div>
+        ) : (
+          <Content>
+            <SearchComponent totalResults={data && data.total_results} />
+            <H1>Resultados por: {query.get('name')}</H1>
 
-          <HomeList data={data && data.results} />
+            <HomeList data={data && data.results} />
 
-          {data && data.total_pages !== 1 && (
-            <Pagination
-              handleMoreResults={previous => handlePage(currentPage, previous)}
-              currentPage={currentPage}
-            />
-          )}
-        </Content>
-      )}
-    </Container>
+            {data && data.total_pages !== 1 && (
+              <Pagination
+                handleMoreResults={previous =>
+                  handlePage(currentPage, previous)
+                }
+                currentPage={currentPage}
+              />
+            )}
+          </Content>
+        )}
+      </Container>
+    </>
   )
 }
 

@@ -25,7 +25,7 @@ const Home = () => {
   }
   return (
     <>
-      {/* <Seo title="Home" /> */}
+      <Seo title="Home" />
 
       <Container>
         <Header />

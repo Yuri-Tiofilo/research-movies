@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet'
 // import { Container } from './styles';
 
 type SeoProps = {
-  title: string
+  title?: string
   description?: string
   image?: string
   shouldExcludeTitleSuffix?: boolean
@@ -20,18 +20,19 @@ const Seo = ({
   shouldIndexPage = true,
   linkCanonical = 'https://seacrh-movies-q2.netlify.app'
 }: SeoProps) => {
-  console.log('veio aqui no seo')
-  return (
-    <div>
-      <Helmet>
-        {description && <meta name="description" content={description} />}
-        {image && <meta name="image" content={image} />}
-        <title>{title}</title>
-        <link rel="canonical" href={linkCanonical} />
+  const pageTitle = `${title} ${
+    !shouldExcludeTitleSuffix ? '| Search Movies' : ''
+  }`
 
-        {!shouldIndexPage && <meta name="robots" content="noindex, nofollow" />}
-      </Helmet>
-    </div>
+  return (
+    <Helmet>
+      {description && <meta name="description" content={description} />}
+      {image && <meta name="image" content={image} />}
+      <title>{pageTitle}</title>
+      <link rel="canonical" href={linkCanonical} />
+
+      {!shouldIndexPage && <meta name="robots" content="noindex, nofollow" />}
+    </Helmet>
   )
 }
 

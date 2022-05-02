@@ -1,8 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 
-// import { Container } from './styles';
-
 type SeoProps = {
   title?: string
   description?: string

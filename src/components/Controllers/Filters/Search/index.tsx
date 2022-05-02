@@ -16,9 +16,10 @@ const Search = ({ totalResults }: Props) => {
 
   function search(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    if (location.pathname === '/home' || location.pathname === '/search') {
+    const locationReplaced = location.pathname.split('/')[1]
+    if (location.pathname === '/home' || locationReplaced === 'search') {
       if (searchState !== '') {
-        window.location.href = `/search?name=${searchState}`
+        window.location.href = `/search/${searchState}`
       }
     }
   }

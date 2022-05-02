@@ -22,12 +22,9 @@ export type Results = {
   overview: string
   popularity: number
   poster_path: string
-  // production_companies: (5) [{…}, {…}, {…}, {…}, {…}]
-  // production_countries: (2) [{…}, {…}]
   release_date: string
   revenue: number
   runtime: number
-  // spoken_languages: [{…}]
   status: string
   tagline: string
   title: string

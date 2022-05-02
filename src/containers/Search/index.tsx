@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import {
   H1,
@@ -15,33 +15,26 @@ import { searchInputMovies } from 'common/query/useMovies'
 import { queryClient } from 'common/services/query'
 import { DataAPIMovies } from 'common/interfaces/movies'
 
-function useQuery() {
-  const { search } = useLocation()
-
-  return React.useMemo(() => new URLSearchParams(search), [search])
+type Params = {
+  movie: string
 }
 
 const Search = () => {
+  const { movie } = useParams<Params>()
   const [currentPage, setCurrentPage] = useState(1)
   const [loading, setLoading] = useState(false)
 
   const [data, setData] = useState<DataAPIMovies>({} as DataAPIMovies)
 
-  const query = useQuery()
-
   async function loadSearch(page: number) {
-    if (query.get('name') && query.get('name') !== '') {
-      setLoading(true)
-      const response = await queryClient.fetchQuery<DataAPIMovies>(
-        'movies-search',
-        () => searchInputMovies(String(query.get('name')), String(page))
-      )
+    setLoading(true)
+    const response = await queryClient.fetchQuery<DataAPIMovies>(
+      'movies-search',
+      () => searchInputMovies(String(movie), String(page))
+    )
 
-      setData(response)
-      setLoading(false)
-    } else {
-      window.location.href = '/home'
-    }
+    setData(response)
+    setLoading(false)
   }
 
   const handlePage = useCallback(
@@ -81,7 +74,7 @@ const Search = () => {
 
   return (
     <>
-      <Seo title={String(query.get('name'))} />
+      <Seo title={String(movie)} />
       <Container>
         <Header />
 
@@ -90,7 +83,7 @@ const Search = () => {
         ) : (
           <Content>
             <SearchComponent totalResults={data && data.total_results} />
-            <H1>Resultados por: {query.get('name')}</H1>
+            <H1>Resultados por: {movie}</H1>
 
             <HomeList data={data && data.results} />
 

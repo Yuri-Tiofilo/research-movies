@@ -25,7 +25,7 @@ const route = [
     isPrivate: true
   },
   {
-    path: '/search',
+    path: '/search/:movie',
     component: Search,
     exact: true,
     isPrivate: true

@@ -12,7 +12,7 @@ export async function loadMoviesQuery(page: string) {
 
     return data
   } catch (error) {
-    alert('deu ruim')
+    alert('Error ao realizar ao buscar filmes')
   }
 }
 

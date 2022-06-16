@@ -26,7 +26,9 @@ yarn commit
 
 `````js
 yarn build
+
 or
+
 git push origin main // CI/CD Netlify
 `````
 
